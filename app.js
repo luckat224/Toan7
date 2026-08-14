@@ -92,6 +92,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Navbar Toolbar Collapse Toggle
+    const collapseBtn = document.getElementById('navbar-collapse-btn');
+    const navbar = document.querySelector('.navbar');
+
+    if (collapseBtn && navbar) {
+        collapseBtn.addEventListener('click', () => {
+            navbar.classList.toggle('toolbar-collapsed');
+            const isCollapsed = navbar.classList.contains('toolbar-collapsed');
+            collapseBtn.innerHTML = isCollapsed ? '▼' : '▲';
+            collapseBtn.title = isCollapsed ? 'Hiện đầy đủ thanh công cụ' : 'Thu nhỏ thanh công cụ';
+            localStorage.setItem('math7_toolbar_collapsed', isCollapsed ? 'true' : 'false');
+        });
+
+        const savedCollapsed = localStorage.getItem('math7_toolbar_collapsed');
+        if (savedCollapsed === 'true') {
+            navbar.classList.add('toolbar-collapsed');
+            collapseBtn.innerHTML = '▼';
+            collapseBtn.title = 'Hiện đầy đủ thanh công cụ';
+        }
+    }
+
     // Initial Load
     const savedFontSize = localStorage.getItem('math7_font_size');
     if (savedFontSize) setFontSize(parseInt(savedFontSize));

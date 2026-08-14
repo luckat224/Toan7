@@ -134,7 +134,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    transition: all 0.2s;
+    transition: all 0.25s ease;
 }
 
 .btn-ctrl:hover {
@@ -152,6 +152,78 @@ body {
 .btn-presbyopia:hover {
     background: #d97706;
     color: #fff;
+}
+
+.btn-collapse {
+    background: #0f172a;
+    color: #38bdf8;
+    border: 2px solid #38bdf8;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+.btn-collapse:hover {
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+/* NAVBAR TOOLBAR COLLAPSE MODE */
+.navbar {
+    transition: padding 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.navbar.toolbar-collapsed {
+    padding: 10px 20px;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    pointer-events: none;
+}
+
+.navbar.toolbar-collapsed .brand span {
+    display: none !important;
+}
+
+.navbar.toolbar-collapsed .brand #sidebar-toggle {
+    pointer-events: auto;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1.5px solid #38bdf8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    color: #38bdf8;
+}
+
+.navbar.toolbar-collapsed .brand #sidebar-toggle:hover {
+    background: #0284c7;
+    color: #ffffff;
+}
+
+.navbar.toolbar-collapsed .nav-controls {
+    pointer-events: none;
+}
+
+.navbar.toolbar-collapsed .nav-controls #presbyopia-mode,
+.navbar.toolbar-collapsed .nav-controls #font-plus,
+.navbar.toolbar-collapsed .nav-controls #font-minus {
+    display: none !important;
+}
+
+.navbar.toolbar-collapsed .btn-collapse {
+    pointer-events: auto;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    color: #38bdf8;
+    border: 1.5px solid #38bdf8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    padding: 6px 14px;
+    font-size: 14px;
+}
+
+.navbar.toolbar-collapsed .btn-collapse:hover {
+    background: #0284c7;
+    color: #ffffff;
 }
 
 /* MAIN LAYOUT WITH SIDEBAR */

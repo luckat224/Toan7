@@ -1,130 +1,177 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const lessons = window.LESSONS_DATA || [];
-    const lessonListEl = document.getElementById('lesson-list');
-    const contentBodyEl = document.getElementById('content-body');
-    const searchInput = document.getElementById('search-input');
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const fontPlusBtn = document.getElementById('font-plus');
-    const fontMinusBtn = document.getElementById('font-minus');
-    const presbyopiaBtn = document.getElementById('presbyopia-mode');
+    const mathData = window.MATH7_DATA || {
+        volume1: window.LESSONS_DATA || [],
+        volume2: [],
+        khtn7: []
+    };
+
+    // DOM Elements - Screens
+    const welcomeScreen = document.getElementById('welcome-screen');
+    const readerView = document.getElementById('reader-view');
+
+    // DOM Elements - Sidebar
     const sidebarToggleBtn = document.getElementById('sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
-    
-    let currentFontSize = 22;
+    const themeToggleBtn = document.getElementById('sidebar-theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const themeText = document.getElementById('theme-text');
+    const fontDecreaseBtn = document.getElementById('font-decrease');
+    const fontIncreaseBtn = document.getElementById('font-increase');
+    const lessonListEl = document.getElementById('lesson-list');
+    const contentBodyEl = document.getElementById('content-body');
 
-    // Render Sidebar Lessons List
-    function renderSidebar(filteredLessons = lessons) {
+    let currentVolume = 'volume1';
+    let activeLessons = [];
+    let currentFontSize = 22; // Base font size default
+
+    // --- SCREEN TRANSITIONS ---
+    function showWelcomeScreen() {
+        welcomeScreen.style.display = 'flex';
+        readerView.style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showReaderScreen(volKey) {
+        welcomeScreen.style.display = 'none';
+        readerView.style.display = 'block';
+        setVolume(volKey);
+    }
+
+    // Connect Welcome Screen 3 Cards
+    document.querySelectorAll('.minimal-hub-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const vol = card.getAttribute('data-volume');
+            showReaderScreen(vol);
+        });
+    });
+
+    // --- VOLUME SWITCHING ---
+    function setVolume(volKey) {
+        currentVolume = volKey;
+        activeLessons = mathData[volKey] || [];
+        renderSidebar(activeLessons);
+
+        if (activeLessons.length > 0) {
+            loadLesson(activeLessons[0]);
+        }
+    }
+
+    // --- SIDEBAR RENDERING ---
+    function renderSidebar(lessons = activeLessons) {
         lessonListEl.innerHTML = '';
-        if (filteredLessons.length === 0) {
-            lessonListEl.innerHTML = '<li style="padding: 12px; color: #94a3b8;">Không tìm thấy bài học phù hợp.</li>';
+        if (lessons.length === 0) {
+            lessonListEl.innerHTML = '<li class="no-results">Chưa có bài học.</li>';
             return;
         }
 
-        filteredLessons.forEach((lesson, index) => {
+        lessons.forEach((lesson, index) => {
             const li = document.createElement('li');
             li.className = `lesson-item ${index === 0 ? 'active' : ''}`;
             li.setAttribute('data-id', lesson.id);
+
             const cleanTitle = lesson.title
                 .replace(/^CHƯƠNG\s+[IVX\d]+[^:]*:\s*/i, '')
-                .replace(/^[🎮📖📚\s]+/, '')
+                .replace(/^[🎮📖📚🌟🧪\s]+/, '')
                 .trim();
-            li.innerHTML = `<span class="lesson-icon">📘</span> <span class="lesson-name">${cleanTitle}</span>`;
-            
+
+            let icon = '📘';
+            if (currentVolume === 'volume2') icon = '📕';
+            if (currentVolume === 'khtn7') icon = '🧪';
+
+            li.innerHTML = `
+                <span class="lesson-icon">${icon}</span>
+                <span class="lesson-name">${cleanTitle}</span>
+            `;
+
             li.addEventListener('click', () => {
                 document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('active'));
                 li.classList.add('active');
                 loadLesson(lesson);
+                // On mobile, auto close sidebar after selecting
+                if (window.innerWidth <= 768 && sidebar) {
+                    sidebar.classList.remove('open');
+                }
             });
 
             lessonListEl.appendChild(li);
         });
     }
 
-    // Load Active Lesson
+    // --- LOAD ACTIVE LESSON ---
     function loadLesson(lesson) {
         contentBodyEl.innerHTML = lesson.html;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Search Filter Functionality (if present)
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            if (!query) {
-                renderSidebar(lessons);
-                return;
-            }
-            const filtered = lessons.filter(l => 
-                l.title.toLowerCase().includes(query) || 
-                l.html.toLowerCase().includes(query)
-            );
-            renderSidebar(filtered);
-        });
-    }
-
-    // Font & Image / SVG Size Adjusters (Presbyopia friendly)
+    // --- CONTINUOUS FONT SIZE CONTROLS (TĂNG/GIẢM MÃI HOÀI) ---
     function setFontSize(size) {
-        currentFontSize = size;
+        currentFontSize = Math.max(10, size); // Minimum 10px, no upper limit!
         const zoomFactor = currentFontSize / 22;
         document.body.style.setProperty('--base-font-size', `${currentFontSize}px`);
         document.body.style.setProperty('--zoom-factor', zoomFactor);
         localStorage.setItem('math7_font_size', currentFontSize);
     }
 
-    fontPlusBtn.addEventListener('click', () => setFontSize(currentFontSize + 2));
-    fontMinusBtn.addEventListener('click', () => setFontSize(Math.max(16, currentFontSize - 2)));
-    presbyopiaBtn.addEventListener('click', () => setFontSize(26)); // Super Big for Presbyopia (Scales both Text & SVGs/Images)
+    if (fontIncreaseBtn) {
+        fontIncreaseBtn.addEventListener('click', () => {
+            setFontSize(currentFontSize + 2); // Tăng lên 2px mỗi lần bấm không giới hạn
+        });
+    }
 
-    // Theme Toggle (if present)
+    if (fontDecreaseBtn) {
+        fontDecreaseBtn.addEventListener('click', () => {
+            setFontSize(currentFontSize - 2); // Giảm đi 2px mỗi lần bấm
+        });
+    }
+
+    // --- DARK / LIGHT THEME TOGGLE IN SIDEBAR ---
+    function updateThemeUI(isDark) {
+        if (isDark) {
+            document.body.classList.add('dark-theme');
+            if (themeIcon) themeIcon.textContent = '☀️';
+            if (themeText) themeText.textContent = 'Sáng';
+            if (themeToggleBtn) themeToggleBtn.classList.add('active');
+        } else {
+            document.body.classList.remove('dark-theme');
+            if (themeIcon) themeIcon.textContent = '🌙';
+            if (themeText) themeText.textContent = 'Tối';
+            if (themeToggleBtn) themeToggleBtn.classList.remove('active');
+        }
+    }
+
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            const isDark = document.body.classList.contains('dark-theme');
-            themeToggleBtn.innerHTML = isDark ? '☀️' : '🌙';
+            const isDark = !document.body.classList.contains('dark-theme');
+            updateThemeUI(isDark);
             localStorage.setItem('math7_theme', isDark ? 'dark' : 'light');
         });
     }
 
-    // Sidebar Toggle
-    if (sidebarToggleBtn) {
+    // --- SIDEBAR TOGGLE ---
+    if (sidebarToggleBtn && sidebar) {
         sidebarToggleBtn.addEventListener('click', () => {
             sidebar.classList.toggle('collapsed');
+            sidebar.classList.toggle('open');
         });
     }
 
-    // Navbar Toolbar Collapse Toggle
-    const collapseBtn = document.getElementById('navbar-collapse-btn');
-    const navbar = document.querySelector('.navbar');
-
-    if (collapseBtn && navbar) {
-        collapseBtn.addEventListener('click', () => {
-            navbar.classList.toggle('toolbar-collapsed');
-            const isCollapsed = navbar.classList.contains('toolbar-collapsed');
-            collapseBtn.innerHTML = isCollapsed ? '▼' : '▲';
-            collapseBtn.title = isCollapsed ? 'Hiện đầy đủ thanh công cụ' : 'Thu nhỏ thanh công cụ';
-            localStorage.setItem('math7_toolbar_collapsed', isCollapsed ? 'true' : 'false');
-        });
-
-        const savedCollapsed = localStorage.getItem('math7_toolbar_collapsed');
-        if (savedCollapsed === 'true') {
-            navbar.classList.add('toolbar-collapsed');
-            collapseBtn.innerHTML = '▼';
-            collapseBtn.title = 'Hiện đầy đủ thanh công cụ';
-        }
-    }
-
-    // Initial Load
-    const savedFontSize = localStorage.getItem('math7_font_size');
-    if (savedFontSize) setFontSize(parseInt(savedFontSize));
-
+    // --- INITIALIZATION ---
+    // 1. Theme
     const savedTheme = localStorage.getItem('math7_theme');
     if (savedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
-        if (themeToggleBtn) themeToggleBtn.innerHTML = '☀️';
+        updateThemeUI(true);
+    } else {
+        updateThemeUI(false);
     }
 
-    renderSidebar(lessons);
-    if (lessons.length > 0) {
-        loadLesson(lessons[0]);
+    // 2. Font Size
+    const savedFontSize = localStorage.getItem('math7_font_size');
+    if (savedFontSize) {
+        setFontSize(parseInt(savedFontSize));
+    } else {
+        setFontSize(22);
     }
+
+    // 3. Show Welcome Selection Hub initially (reload returns here)
+    showWelcomeScreen();
 });

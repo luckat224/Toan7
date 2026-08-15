@@ -3,46 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CỔNG HỌC TOÁN 7 - SGK KẾT NỐI TRI THỨC</title>
+    <title>HỌC TẬP TOÁN 7 & KHTN 7</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="data.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
-    <!-- TOP NAVBAR -->
-    <header class="navbar">
-        <div class="brand">
-            <button id="sidebar-toggle" class="btn-ctrl" title="Đóng/Mở Danh Sách" style="margin-right: 10px; padding: 5px 10px;">☰</button>
-            <span>📚</span>
-            <span>TOÁN 7</span>
+
+    <!-- 🌟 WELCOME SELECTION HUB (3 NÚT DUY NHẤT) -->
+    <div id="welcome-screen" class="welcome-screen">
+        <div class="welcome-container-minimal">
+            <div class="subject-grid-minimal">
+                <!-- Button 1: TOÁN TẬP 1 -->
+                <button class="minimal-hub-card card-vol1" data-volume="volume1">
+                    <span class="hub-icon">📘</span>
+                    <span class="hub-title">TOÁN TẬP 1</span>
+                </button>
+
+                <!-- Button 2: TOÁN TẬP 2 -->
+                <button class="minimal-hub-card card-vol2" data-volume="volume2">
+                    <span class="hub-icon">📕</span>
+                    <span class="hub-title">TOÁN TẬP 2</span>
+                </button>
+
+                <!-- Button 3: KHTN -->
+                <button class="minimal-hub-card card-khtn" data-volume="khtn7">
+                    <span class="hub-icon">🧪</span>
+                    <span class="hub-title">KHTN</span>
+                </button>
+            </div>
         </div>
-
-        <div class="nav-controls">
-            <!-- Font Size Controls -->
-            <button id="presbyopia-mode" class="btn-ctrl btn-presbyopia" title="Cỡ chữ 26px siêu to">👓</button>
-            <button id="font-plus" class="btn-ctrl" title="Tăng cỡ chữ">+</button>
-            <button id="font-minus" class="btn-ctrl" title="Giảm cỡ chữ">-</button>
-            <!-- Minimize / Expand Top Controls Button -->
-            <button id="navbar-collapse-btn" class="btn-ctrl btn-collapse" title="Thu nhỏ / Hiện thanh công cụ">▲</button>
-        </div>
-    </header>
-
-    <!-- MAIN APP CONTAINER -->
-    <div class="app-container">
-        <!-- SIDEBAR NAVIGATION -->
-        <aside class="sidebar">
-            <div class="sidebar-title">📑 DANH MỤC 23 BÀI HỌC & TỔNG ÔN SGK</div>
-            <ul id="lesson-list" class="lesson-list">
-                <!-- Lessons populated dynamically by app.js -->
-            </ul>
-        </aside>
-
-        <!-- MAIN LESSON READER PANEL -->
-        <main class="content-area">
-            <article id="content-body" class="lesson-card">
-                <!-- Active lesson content loaded dynamically -->
-            </article>
-        </main>
     </div>
+
+    <!-- 📖 MAIN LESSON READER VIEW (KHÔNG CÒN THANH ĐEN TRÊN CÙNG) -->
+    <div id="reader-view" class="reader-view" style="display: none;">
+        <!-- NÚT ☰ THU PHÓNG MENU (CHỈ GIỮ ICON ☰, KHÔNG CHỮ) -->
+        <button id="sidebar-toggle" class="btn-sidebar-toggle" title="Đóng/Mở Menu">☰</button>
+
+        <div class="reader-container">
+            <!-- SIDEBAR BÊN TRÁI -->
+            <aside class="sidebar">
+                <!-- THANH CÔNG CỤ: ĐỔI SÁNG TỐI + 2 NÚT TĂNG GIẢM CHỮ -->
+                <div class="sidebar-controls-bar">
+                    <button id="sidebar-theme-toggle" class="ctrl-btn theme-btn" title="Đổi giao diện Sáng / Tối">
+                        <span id="theme-icon">🌙</span> <span id="theme-text">Tối</span>
+                    </button>
+                    <div class="font-controls-group">
+                        <button id="font-decrease" class="ctrl-btn font-btn" title="Giảm cỡ chữ">A⁻</button>
+                        <button id="font-increase" class="ctrl-btn font-btn" title="Tăng cỡ chữ (tăng mãi)">A⁺</button>
+                    </div>
+                </div>
+
+                <!-- DANH SÁCH CÁC BÀI HỌC (TRIỆT TIÊU THANH CUỘN KÉP) -->
+                <ul id="lesson-list" class="lesson-list">
+                    <!-- Populated dynamically by app.js -->
+                </ul>
+            </aside>
+
+            <!-- KHUNG NỘI DUNG BÀI HỌC (LẤP ĐẦY TOÀN BỘ KHÔNG GIAN) -->
+            <main class="content-area">
+                <article id="content-body" class="lesson-card">
+                    <!-- Lesson HTML loaded dynamically -->
+                </article>
+            </main>
+        </div>
+    </div>
+
 </body>
 </html>

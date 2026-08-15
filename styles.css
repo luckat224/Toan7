@@ -1,290 +1,301 @@
-/* ===== HỆ THỐNG DESIGN SYSTEM - TRANG WEB GIÁO TRÌNH TOÁN 7 VIP PRO ===== */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Roboto+Mono:wght@500;700&display=swap');
+/* ===== DESIGN SYSTEM SIÊU CẤP VIP PRO - HỌC TẬP TOÁN 7 & KHTN 7 ===== */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Roboto+Mono:wght@500;700&display=swap');
 
 :root {
-    /* Color Tokens - Modern HSL Palette */
+    /* Color Tokens */
     --primary: #0284c7;
     --primary-dark: #0369a1;
     --primary-light: #e0f2fe;
     --secondary: #0d9488;
     --secondary-light: #ccfbf1;
-    --accent: #4338ca;
+    --accent: #6366f1;
     --accent-light: #e0e7ff;
     --success: #16a34a;
     --success-light: #dcfce7;
     --warning: #d97706;
     --warning-light: #fef3c7;
+    --danger: #dc2626;
 
-    /* Base Typography & Spacing (Presbyopia Default: 22px) */
+    /* Base Typography */
     --base-font-size: 22px;
     --zoom-factor: 1;
     --line-height: 1.85;
 
-    /* Theme Colors (Light Theme Default) */
-    --bg-main: #f8fafc;
+    /* Light Theme Colors */
+    --bg-app: #f8fafc;
     --bg-surface: #ffffff;
     --bg-sidebar: #0f172a;
     --text-main: #0f172a;
-    --text-muted: #475569;
+    --text-muted: #64748b;
     --text-sidebar: #f8fafc;
-    --border-color: #cbd5e1;
-    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --border-color: #e2e8f0;
+    --sidebar-border: #1e293b;
+    --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
 }
 
-/* Dark Mode Theme Tokens */
+/* Dark Theme Colors */
 body.dark-theme {
-    --bg-main: #090d16;
-    --bg-surface: #1e293b;
-    --bg-sidebar: #020617;
+    --bg-app: #090d16;
+    --bg-surface: #131c2e;
+    --bg-sidebar: #050811;
     --text-main: #f8fafc;
-    --text-muted: #cbd5e1;
-    --border-color: #334155;
+    --text-muted: #94a3b8;
+    --border-color: #1e293b;
     --primary-light: #1e3a8a;
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
 }
 
-/* Global Resets & Base Styles */
+/* Global Reset */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* CUSTOM SCROLLBAR - TRIỆT TIÊU THANH TRẮNG XẤU */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #334155 transparent;
+}
+
 body {
-    font-family: 'Open Sans', 'Segoe UI', Arial, sans-serif;
+    font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-size: var(--base-font-size);
-    line-height: 2.2;
+    line-height: var(--line-height);
     color: var(--text-main);
-    background-color: var(--bg-main);
+    background-color: var(--bg-app);
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+}
+
+/* ============================================================
+   🌟 1. WELCOME SELECTION HUB (3 NÚT DUY NHẤT)
+============================================================ */
+.welcome-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0a0f1d 100%);
+}
+
+.welcome-container-minimal {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.subject-grid-minimal {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    transition: background-color 0.3s, color 0.3s, font-size 0.2s;
+    gap: 24px;
+    max-width: 650px;
+    margin: 0 auto;
 }
 
-/* TOP NAVBAR */
-.navbar {
-    background-color: var(--bg-sidebar);
-    color: var(--text-sidebar);
-    padding: 16px 32px;
+.minimal-hub-card {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    justify-content: center;
+    gap: 20px;
+    padding: 28px 36px;
+    border-radius: 20px;
+    border: 2px solid #334155;
+    background: #1e293b;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    outline: none;
+    text-decoration: none;
 }
 
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.minimal-hub-card .hub-icon {
+    font-size: 38px;
+}
+
+.minimal-hub-card .hub-title {
     font-size: 26px;
-    font-weight: 800;
-    color: #38bdf8;
+    font-weight: 900;
+    letter-spacing: 1px;
 }
 
-.nav-controls {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+.minimal-hub-card:hover {
+    transform: translateY(-6px) scale(1.02);
 }
 
-.search-box {
+.minimal-hub-card.card-vol1:hover {
+    background: linear-gradient(135deg, #0284c7, #0369a1);
+    border-color: #38bdf8;
+    box-shadow: 0 15px 35px rgba(2, 132, 199, 0.4);
+}
+
+.minimal-hub-card.card-vol2:hover {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    border-color: #f87171;
+    box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4);
+}
+
+.minimal-hub-card.card-khtn:hover {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    border-color: #4ade80;
+    box-shadow: 0 15px 35px rgba(22, 163, 74, 0.4);
+}
+
+/* ============================================================
+   📖 2. MAIN LESSON READER VIEW (KHÔNG CÒN THANH ĐEN PHÍA TRÊN)
+============================================================ */
+.reader-view {
+    min-height: 100vh;
     position: relative;
 }
 
-.search-input {
-    background: #1e293b;
-    border: 2px solid #334155;
-    color: #fff;
-    padding: 10px 16px 10px 42px;
-    border-radius: 30px;
-    font-size: 18px;
-    width: 280px;
-    transition: all 0.3s;
-}
-
-.search-input:focus {
-    outline: none;
-    border-color: #38bdf8;
-    width: 340px;
-    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
-}
-
-.search-icon {
-    position: absolute;
+/* NÚT ☰ THU PHÓNG MENU FLOATING (CHỈ CÓ ICON ☰) */
+.btn-sidebar-toggle {
+    position: fixed;
+    top: 14px;
     left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #94a3b8;
-    font-size: 18px;
-}
-
-.btn-ctrl {
-    background: #1e293b;
-    color: #fff;
-    border: 2px solid #334155;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.25s ease;
-}
-
-.btn-ctrl:hover {
-    background: #38bdf8;
-    color: #0f172a;
-    border-color: #38bdf8;
-}
-
-.btn-presbyopia {
-    background: #f59e0b;
-    color: #000;
-    border-color: #f59e0b;
-}
-
-.btn-presbyopia:hover {
-    background: #d97706;
-    color: #fff;
-}
-
-.btn-collapse {
-    background: #0f172a;
-    color: #38bdf8;
-    border: 2px solid #38bdf8;
-    padding: 6px 12px;
-    font-size: 14px;
-    border-radius: 6px;
-}
-
-.btn-collapse:hover {
-    background: #38bdf8;
-    color: #0f172a;
-}
-
-/* NAVBAR TOOLBAR COLLAPSE MODE */
-.navbar {
-    transition: padding 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.navbar.toolbar-collapsed {
-    padding: 10px 20px;
-    background: transparent !important;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-    pointer-events: none;
-}
-
-.navbar.toolbar-collapsed .brand span {
-    display: none !important;
-}
-
-.navbar.toolbar-collapsed .brand #sidebar-toggle {
-    pointer-events: auto;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(8px);
-    border: 1.5px solid #38bdf8;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    color: #38bdf8;
-}
-
-.navbar.toolbar-collapsed .brand #sidebar-toggle:hover {
-    background: #0284c7;
-    color: #ffffff;
-}
-
-.navbar.toolbar-collapsed .nav-controls {
-    pointer-events: none;
-}
-
-.navbar.toolbar-collapsed .nav-controls #presbyopia-mode,
-.navbar.toolbar-collapsed .nav-controls #font-plus,
-.navbar.toolbar-collapsed .nav-controls #font-minus {
-    display: none !important;
-}
-
-.navbar.toolbar-collapsed .btn-collapse {
-    pointer-events: auto;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(8px);
-    color: #38bdf8;
-    border: 1.5px solid #38bdf8;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    padding: 6px 14px;
-    font-size: 14px;
-}
-
-.navbar.toolbar-collapsed .btn-collapse:hover {
-    background: #0284c7;
-    color: #ffffff;
-}
-
-/* MAIN LAYOUT WITH SIDEBAR */
-.app-container {
+    z-index: 1100;
+    width: 44px;
+    height: 44px;
     display: flex;
-    flex: 1;
+    align-items: center;
+    justify-content: center;
+    background: #1e293b;
+    color: #38bdf8;
+    border: 1.5px solid #334155;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
 }
 
+.btn-sidebar-toggle:hover {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: #38bdf8;
+    transform: scale(1.05);
+}
+
+/* Container */
+.reader-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ============================================================
+   📑 3. SIDEBAR (TRIỆT TIÊU 2 THANH CUỘN KÉP)
+============================================================ */
 .sidebar {
     width: 360px;
     background-color: var(--bg-sidebar);
     color: var(--text-sidebar);
-    padding: 24px 16px;
-    overflow-y: auto;
-    max-height: calc(100vh - 76px);
+    padding: 68px 14px 16px 14px; /* Padding-top chừa chỗ cho nút ☰ */
+    height: 100vh;
     position: sticky;
-    top: 76px;
-    border-right: 2px solid var(--border-color);
-    transition: all 0.3s ease;
+    top: 0;
+    border-right: 1.5px solid var(--sidebar-border);
+    transition: width 0.3s ease, padding 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden; /* CẤM THANH CUỘN Ở SIDEBAR NGOÀI ĐỂ KHÔNG BỊ TRÙNG THANH TRẮNG */
+    flex-shrink: 0;
 }
 
 .sidebar.collapsed {
-    display: none;
+    display: none !important;
 }
 
-.sidebar-title {
-    font-size: 20px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #94a3b8;
-    margin-bottom: 16px;
-    padding-left: 8px;
+/* Thanh điều khiển Dark mode + Phóng to thu nhỏ */
+.sidebar-controls-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1e293b;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1.5px solid #334155;
 }
 
-.chapter-group {
-    margin-bottom: 20px;
-}
-
-.chapter-header {
-    font-size: 19px;
-    font-weight: 700;
-    color: #38bdf8;
-    padding: 10px 12px;
-    background: rgba(56, 189, 248, 0.1);
+.ctrl-btn {
+    background: #0f172a;
+    color: #cbd5e1;
+    border: 1.5px solid #334155;
+    padding: 6px 14px;
     border-radius: 8px;
-    margin-bottom: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
+.ctrl-btn:hover {
+    background: #334155;
+    color: #ffffff;
+}
+
+.font-controls-group {
+    display: flex;
+    gap: 6px;
+}
+
+.font-btn {
+    padding: 6px 14px;
+    font-size: 15px;
+    font-weight: 900;
+    color: #38bdf8;
+    border-color: #0284c7;
+}
+
+.font-btn:hover {
+    background: #0284c7;
+    color: #ffffff;
+}
+
+/* Danh sách bài học cuộn mượt mà */
 .lesson-list {
     list-style: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    padding-right: 4px;
 }
 
 .lesson-item {
-    padding: 12px 16px;
+    padding: 11px 12px;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 15.5px;
     font-weight: 600;
     color: #cbd5e1;
     cursor: pointer;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     transition: all 0.2s;
     display: flex;
     align-items: center;
@@ -293,68 +304,105 @@ body {
 
 .lesson-item:hover {
     background: #1e293b;
-    color: #fff;
+    color: #ffffff;
+    transform: translateX(3px);
 }
 
 .lesson-item.active {
     background: var(--primary);
-    color: #fff;
+    color: #ffffff;
     font-weight: 700;
-    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
 }
 
-/* MAIN CONTENT AREA */
+.lesson-icon {
+    font-size: 17px;
+    flex-shrink: 0;
+}
+
+.lesson-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   📄 4. MAIN CONTENT AREA (LẤP ĐẦY MÀN HÌNH KHÔNG BỊ HỞ TRỐNG)
+============================================================ */
 .content-area {
     flex: 1;
-    padding: 30px 40px;
+    padding: 20px 30px;
+    width: 100%;
     max-width: 100%;
     margin: 0;
+    min-width: 0;
+    transition: padding 0.3s ease;
+}
+
+/* Khi sidebar thu lại, chừa khoảng nhỏ bên trái để không đè nút ☰ */
+.reader-container:has(.sidebar.collapsed) .content-area {
+    padding-left: 70px;
+    padding-right: 30px;
+    padding-top: 18px;
 }
 
 .lesson-card {
     background: var(--bg-surface);
-    border: 2px solid var(--border-color);
+    border: 1.5px solid var(--border-color);
     border-radius: 16px;
-    padding: 48px;
+    padding: 40px 48px;
+    width: 100%;
+    max-width: 100%;
     box-shadow: var(--card-shadow);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* TYPOGRAPHY IN CONTENT */
+/* Headings */
 h1 {
-    font-size: 36px;
-    font-weight: 800;
+    font-size: 34px;
+    font-weight: 900;
     color: var(--primary-dark);
     border-bottom: 4px solid var(--primary);
     padding-bottom: 14px;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     line-height: 1.3;
 }
 
+body.dark-theme h1 {
+    color: #38bdf8;
+}
+
 h2 {
-    font-size: 28px;
-    font-weight: 700;
+    font-size: 26px;
+    font-weight: 800;
     color: var(--secondary);
     border-bottom: 2px solid var(--secondary);
     padding-bottom: 8px;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 36px;
+    margin-bottom: 18px;
 }
 
 h3 {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 22px;
+    font-weight: 800;
     color: var(--accent);
-    margin-top: 32px;
-    margin-bottom: 16px;
+    margin-top: 28px;
+    margin-bottom: 14px;
 }
 
 p, li {
     font-size: var(--base-font-size);
     line-height: var(--line-height);
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
-/* PHÂN SỐ ĐỨNG THỰC SỰ - DÙNG CSS ĐẲNG CẤP */
+ul, ol {
+    padding-left: 28px;
+    margin-bottom: 20px;
+}
+
+/* Fraction Rendering */
 .frac {
     display: inline-flex;
     flex-direction: column;
@@ -367,187 +415,106 @@ p, li {
     margin: 0 4px;
     color: var(--primary-dark);
 }
-.frac .top {
-    border-bottom: 3px solid var(--primary);
-    padding-bottom: 4px;
-}
-.frac .bottom {
-    padding-top: 4px;
+
+body.dark-theme .frac {
+    color: #38bdf8;
 }
 
-/* KHỐI NỔI BẬT & THUẬT NGỮ */
+.frac .top {
+    border-bottom: 3px solid var(--primary);
+    padding-bottom: 3px;
+}
+
+.frac .bottom {
+    padding-top: 3px;
+}
+
+/* Callout Blockquote */
 blockquote {
     background: var(--primary-light);
     border-left: 8px solid var(--primary);
     padding: 20px 28px;
-    border-radius: 0 12px 12px 0;
+    border-radius: 0 14px 14px 0;
     margin: 24px 0;
     font-size: var(--base-font-size);
 }
 
 blockquote p {
     margin: 0;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--primary-dark);
 }
 
-/* KHỐI GỢI Ý TƯ DUY THÔNG MINH (HINT BOX) */
-blockquote.hint-box, .hint-box {
-    background: #fefce8 !important;
-    border-left: 8px solid #eab308 !important;
-    padding: 18px 24px !important;
-    border-radius: 0 12px 12px 0 !important;
-    margin: 20px 0 !important;
-    box-shadow: 0 2px 8px rgba(234, 179, 8, 0.15) !important;
+body.dark-theme blockquote {
+    background: #0c4a6e !important;
 }
 
-blockquote.hint-box p, .hint-box p {
-    color: #854d0e !important;
-    font-weight: 700 !important;
+body.dark-theme blockquote p {
+    color: #e0f2fe !important;
 }
 
-body.dark-theme blockquote.hint-box, body.dark-theme .hint-box {
-    background: #422006 !important;
-    border-left-color: #facc15 !important;
-}
-
-body.dark-theme blockquote.hint-box p, body.dark-theme .hint-box p {
-    color: #fef08a !important;
-}
-
-/* BẢNG BIỂU RỘNG RÃI - THẲNG HÀNG THẲNG LỐI */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 32px 0;
-    font-size: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-th, td {
-    border: 2px solid var(--border-color);
-    padding: 16px 20px;
-    text-align: left;
-    word-wrap: break-word;
-}
-
-th {
-    background-color: #e2e8f0;
-    color: #0f172a;
-    font-weight: 800;
-    font-size: 21px;
-}
-
-body.dark-theme th {
-    background-color: #334155;
-    color: #fff;
-}
-
-tr:nth-child(even) {
-    background-color: rgba(0,0,0,0.02);
-}
-
-/* INTERACTIVE TRẠM KIỂM TRA & BÀI TẬP */
+/* Interactive Accordion Details */
 details {
-    background: var(--bg-main);
+    background: var(--bg-app);
     border: 2px solid var(--border-color);
-    border-radius: 12px;
-    padding: 18px 24px;
+    border-radius: 14px;
+    padding: 20px 26px;
     margin: 24px 0;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
 details[open] {
     border-color: var(--primary);
-    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+    box-shadow: 0 4px 16px rgba(2, 132, 199, 0.15);
 }
 
 summary {
     font-weight: 800;
-    font-size: 22px;
+    font-size: 20px;
     color: var(--primary);
     cursor: pointer;
     user-select: none;
 }
 
-.details-content {
-    margin-top: 18px;
-    padding-top: 18px;
-    border-top: 2px dashed var(--border-color);
-}
-
-.details-content ul {
-    padding-left: 28px;
-    margin-bottom: 16px;
-}
-
-.details-content li {
-    margin-bottom: 12px;
-    line-height: var(--line-height);
-}
-
-.details-content ul ul {
-    margin-top: 8px;
-    margin-bottom: 8px;
-    padding-left: 24px;
-}
-
-pre {
-    background: #0f172a;
+body.dark-theme summary {
     color: #38bdf8;
-    padding: 24px;
-    border-radius: 12px;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 19px;
-    line-height: 1.5;
-    overflow-x: auto;
-    margin: 28px 0;
-    border: 2px solid #334155;
 }
 
-/* ĐỒ HỌA SVG & HÌNH ẢNH CO GIÃN THEO NÚT PHÓNG TO / THU NHỎ */
-.content-area svg, .geometry-svg {
+/* SVGs and Images Scaling */
+.content-area svg {
     display: block;
     margin: 28px auto;
     width: 100% !important;
-    max-width: calc(520px * var(--zoom-factor, 1)) !important;
+    max-width: calc(720px * var(--zoom-factor, 1)) !important;
     height: auto !important;
-    background: #fff;
-    border-radius: 10px;
-    padding: 14px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-    transition: max-width 0.25s ease, transform 0.25s ease;
+    transition: max-width 0.25s ease;
 }
 
 .content-area img {
     display: block;
     margin: 28px auto;
     width: 100% !important;
-    max-width: calc(650px * var(--zoom-factor, 1)) !important;
+    max-width: calc(720px * var(--zoom-factor, 1)) !important;
     height: auto !important;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: max-width 0.25s ease;
 }
 
-body.dark-theme .content-area svg {
-    background: #e2e8f0;
-}
-
-/* RESPONSIVE BREAKPOINTS */
-@media (max-width: 992px) {
-    .app-container {
-        flex-direction: column;
-    }
+/* Responsive Media Queries */
+@media (max-width: 768px) {
     .sidebar {
-        width: 100%;
-        max-height: 300px;
-        position: static;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 1050;
+        width: 280px;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.5);
     }
     .content-area {
-        padding: 20px;
+        padding: 68px 16px 20px 16px !important;
     }
     .lesson-card {
-        padding: 24px;
+        padding: 24px 20px;
     }
 }

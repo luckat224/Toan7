@@ -320,11 +320,177 @@ body {
     flex-shrink: 0;
 }
 
+/* Thẻ định danh môn học (Hóa / Lý / Sinh / Số học...) */
+.subject-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 800;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+/* Tag colors in sidebar */
+.tag-hoa {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.tag-ly {
+    background-color: rgba(14, 165, 233, 0.2);
+    color: #38bdf8;
+    border: 1px solid rgba(14, 165, 233, 0.4);
+}
+
+.tag-sinh {
+    background-color: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+.tag-khtn {
+    background-color: rgba(168, 85, 247, 0.2);
+    color: #c084fc;
+    border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+.tag-sohoc, .tag-daiso {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.tag-hinhhoc, .tag-hinhkhoi {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.tag-thongke, .tag-xacsuat {
+    background-color: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.4);
+}
+
+.tag-ontap, .tag-luyentap, .tag-tonghop {
+    background-color: rgba(236, 72, 153, 0.2);
+    color: #f472b6;
+    border: 1px solid rgba(236, 72, 153, 0.4);
+}
+
+/* Active lesson tag contrast */
+.lesson-item.active .tag-hoa {
+    background-color: #ef4444;
+    color: #ffffff;
+    border-color: #fca5a5;
+}
+
+.lesson-item.active .tag-ly {
+    background-color: #0284c7;
+    color: #ffffff;
+    border-color: #7dd3fc;
+}
+
+.lesson-item.active .tag-sinh {
+    background-color: #16a34a;
+    color: #ffffff;
+    border-color: #86efac;
+}
+
+.lesson-item.active .tag-khtn {
+    background-color: #9333ea;
+    color: #ffffff;
+    border-color: #d8b4fe;
+}
+
+.lesson-item.active .tag-sohoc,
+.lesson-item.active .tag-daiso,
+.lesson-item.active .tag-hinhhoc,
+.lesson-item.active .tag-hinhkhoi,
+.lesson-item.active .tag-thongke,
+.lesson-item.active .tag-xacsuat,
+.lesson-item.active .tag-ontap,
+.lesson-item.active .tag-luyentap,
+.lesson-item.active .tag-tonghop {
+    background-color: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
 .lesson-name {
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+/* Banner phân môn nổi bật trên đầu bài học */
+.lesson-subject-header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.lesson-subject-header-badge.tag-hoa {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1.5px solid #fca5a5;
+}
+
+.lesson-subject-header-badge.tag-ly {
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1.5px solid #7dd3fc;
+}
+
+.lesson-subject-header-badge.tag-sinh {
+    background: #dcfce7;
+    color: #15803d;
+    border: 1.5px solid #86efac;
+}
+
+.lesson-subject-header-badge.tag-khtn {
+    background: #f3e8ff;
+    color: #7e22ce;
+    border: 1.5px solid #d8b4fe;
+}
+
+body.dark-theme .lesson-subject-header-badge.tag-hoa {
+    background: rgba(239, 68, 68, 0.22);
+    color: #fca5a5;
+    border-color: #ef4444;
+}
+
+body.dark-theme .lesson-subject-header-badge.tag-ly {
+    background: rgba(14, 165, 233, 0.22);
+    color: #7dd3fc;
+    border-color: #0284c7;
+}
+
+body.dark-theme .lesson-subject-header-badge.tag-sinh {
+    background: rgba(34, 197, 94, 0.22);
+    color: #86efac;
+    border-color: #16a34a;
+}
+
+body.dark-theme .lesson-subject-header-badge.tag-khtn {
+    background: rgba(168, 85, 247, 0.22);
+    color: #d8b4fe;
+    border-color: #9333ea;
 }
 
 /* ============================================================
@@ -427,6 +593,55 @@ body.dark-theme .frac {
 
 .frac .bottom {
     padding-top: 3px;
+}
+
+/* Chemistry Valency & Mathematical Overset / Underset */
+.overset {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    line-height: 1;
+    margin: 0 3px;
+}
+
+.overset .over {
+    font-size: 0.72em;
+    font-weight: 800;
+    color: #dc2626;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.overset .base {
+    font-weight: 800;
+    line-height: 1;
+}
+
+body.dark-theme .overset .over {
+    color: #f87171;
+}
+
+.underset {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    line-height: 1;
+    margin: 0 3px;
+}
+
+.underset .under {
+    font-size: 0.72em;
+    font-weight: 700;
+    color: #0284c7;
+    line-height: 1;
+    margin-top: 2px;
+}
+
+.underset .base {
+    font-weight: 800;
+    line-height: 1;
 }
 
 /* Callout Blockquote */
